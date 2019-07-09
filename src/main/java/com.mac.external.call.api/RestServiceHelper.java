@@ -1,9 +1,13 @@
-package external.api.call;
+package com.mac.external.call.api;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.stream.Collectors;
 
 public final class RestServiceHelper {
     private RestServiceHelper() {
@@ -25,14 +29,32 @@ public final class RestServiceHelper {
                         + conn.getResponseCode());
             }
 
+            // convert the stream into String.
             BufferedReader br = new BufferedReader(new InputStreamReader(
                     (conn.getInputStream())));
 
-            String output;
-            System.out.println("Output from Mac Server .... \n");
-            while ((output = br.readLine()) != null) {
-                System.out.println(output);
+            // convert buffer reader to String.
+            String output = br.lines().collect(Collectors.joining());
+
+            // convert the string into JSONObject.
+            if (output != null) {
+
+                // JSONParser
+                JSONParser parser = new JSONParser();
+                JSONObject jsonObject = (JSONObject) parser.parse(output);
+
+                // get vendor details
+                JSONObject vendorDetailsJsonObject = (JSONObject) jsonObject.get("vendorDetails");
+
+                // get company Name.
+                String result = (String) vendorDetailsJsonObject.get("companyName");
+
+                System.out.println("******************Result******************");
+                System.out.println("Mac Address: " + macAddress);
+                System.out.println("Company Name: " + result);
+                System.out.println("******************************************");
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
