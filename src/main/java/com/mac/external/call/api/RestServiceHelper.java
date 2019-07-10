@@ -1,4 +1,4 @@
-package com.mac.external.call.api;
+package main.java.com.mac.external.call.api;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -9,7 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.stream.Collectors;
 
-public final class RestServiceHelper {
+public class RestServiceHelper {
     private RestServiceHelper() {
     }
 

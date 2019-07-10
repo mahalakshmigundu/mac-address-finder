@@ -1,11 +1,10 @@
-package com.mac.address;
+package main.java.com.mac.address;
 
-import com.mac.external.call.api.RestServiceHelper;
+import main.java.com.mac.external.call.api.RestServiceHelper;
 
 import java.util.Scanner;
 
 public class Main {
-
     public static void main(String[] args) {
 
         // Welcome Instructions to the User.
